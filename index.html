@@ -1,0 +1,44 @@
+<!doctype html>
+<head>
+    <script type="module">
+        import { html, css, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
+
+        export class Pc4uRestaurant extends LitElement {
+            static styles = css`
+                :host {
+                    display: block;
+                    font-family: sans-serif;
+                    color: mediumpurple;
+                }
+            `;
+
+            render() {
+                return html`
+                    <h1>I would lye 4 u</h1>
+                    <h2>Offerings</h2>
+                    <ul>
+                        <li>Fine soaps</li>
+                        <li>Aromatic candles</li>
+                    </ul>
+                    <p><strong>Note</strong>: no <em>Fight Club</em> stuff</p>
+                `;
+            }
+        }
+        customElements.define('pc4u-restaurant', Pc4uRestaurant);
+    </script>
+</head>
+<body>
+<header>
+    <h1>Prince Cooks 4 U</h1>
+</header>
+
+<main>
+    <pc4u-restaurant></pc4u-restaurant>
+</main>
+<footer>
+    <div>About</div>
+    <div>
+        &copy; <a href="https://therealadam.com">Adam Keys</a>
+    </div>
+</footer>
+</body>
