@@ -13,19 +13,35 @@
             `;
 
             render() {
+                // TODO make this a class-level thing
+                const trucks = [
+                    {
+                        name: "I would lye 4 u",
+                        slogan: "Fine soap products",
+                        offerings: [
+                            "Fine soaps",
+                            "Aromatic candles",
+                        ],
+                        extra: `*Note*: No _Fight Club_ stuff, don't ask.`
+                    }
+                ];
+                const truck = trucks[0];
+
                 return html`
-                    <h1>I would lye 4 u</h1>
-                    <h2>Offerings</h2>
-                    <ul>
-                        <li>Fine soaps</li>
-                        <li>Aromatic candles</li>
-                    </ul>
-                    <p><strong>Note</strong>: no <em>Fight Club</em> stuff</p>
+                    <h1>${truck.name}</h1>
+                    <h2>${truck.slogan}</h2>
+                    <ul>${this.offeringsTemplate(truck)}</ul>
+                    <p>${truck.extra}</p>
                 `;
+            }
+
+            offeringsTemplate(truck) {
+                return truck.offerings.map(offering => html`<li>${offering}</li>`);
             }
         }
         customElements.define('pc4u-restaurant', Pc4uRestaurant);
     </script>
+    <title>Prince Cooks 4 U</title>
 </head>
 <body>
 <header>
