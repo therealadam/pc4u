@@ -1,9 +1,13 @@
 <!doctype html>
 <head>
     <script type="module">
+        // noinspection JSFileReferences
         import { html, css, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 
         export class Pc4uRestaurant extends LitElement {
+            static properties = {
+                _current: { type: String, state: true }
+            };
             static styles = css`
                 :host {
                     display: block;
@@ -12,31 +16,107 @@
                 }
             `;
 
+            static trucks = [
+                {
+                    name: "I would lye 4 u",
+                    slug: "i-would-lye-4-u",
+                    slogan: "Fine soap products",
+                    offerings: [
+                        "Fine soaps",
+                        "Aromatic candles",
+                    ],
+                    extra: `*Note*: No _Fight Club_ stuff, don't ask.`
+                },
+                {
+                    name: "U Got The Hook",
+                    slug: "u-got-the-hook",
+                    slogan: "The freshest seafood in the MPLS",
+                    offerings: [
+                        "Fish",
+                        "Shrimp",
+                        "Starfish",
+                    ]
+                },
+                {
+                    name: "Billy Jack-wich",
+                    slug: "billy-jack-wich",
+                    slogan: "TK",
+                    offerings: [
+                        "Sandwiches",
+                    ]
+                }
+            ];
+            constructor() {
+                super();
+                this.chooseTruck()
+            }
+
             render() {
-                // TODO make this a class-level thing
-                const trucks = [
-                    {
-                        name: "I would lye 4 u",
-                        slogan: "Fine soap products",
-                        offerings: [
-                            "Fine soaps",
-                            "Aromatic candles",
-                        ],
-                        extra: `*Note*: No _Fight Club_ stuff, don't ask.`
-                    }
-                ];
-                const truck = trucks[0];
+                const truck = this._current;
+
+                return html`
+                    ${this.contentTemplate(truck)}
+                    <div>
+                        <button @click=${this._handleNext}>Next truck</button>
+                        <a href="${this.truckLink()}">🔗Permalink</a>
+                    </div>
+                `;
+            }
+
+            chooseTruck() {
+                const search = window.location.search;
+                let slug = null;
+                if (search) {
+                    const match = search.match(/\?([-\w]+)$/);
+                    slug = match ? match[1] : null;
+                } else {
+                    slug = null;
+                }
+
+                let truck = null;
+                if (slug != null) {
+                    // TODO a more idiomatic null check
+                    truck = this.constructor.trucks.find(t => t.slug === slug);
+                } else {
+                    const rand = Math.floor(Math.random() * this.constructor.trucks.length)
+                    truck = this.constructor.trucks[rand];
+                }
+
+                this._current = truck;
+                this.requestUpdate();
+
+                return;
+            }
+
+            truckLink() {
+                return `${window.location.pathname}/?${this._current.slug}`;
+            }
+
+            _handleNext() {
+                // TODO clear _current
+                this.chooseTruck();
+            }
+
+            contentTemplate(truck) {
 
                 return html`
                     <h1>${truck.name}</h1>
                     <h2>${truck.slogan}</h2>
                     <ul>${this.offeringsTemplate(truck)}</ul>
-                    <p>${truck.extra}</p>
+                    ${this.extraTemplate(truck)}
                 `;
             }
 
             offeringsTemplate(truck) {
                 return truck.offerings.map(offering => html`<li>${offering}</li>`);
+            }
+
+            extraTemplate(truck) {
+                if (this.extra) {
+                    return html`<p>${truck.extra}</p>`;
+                } else {
+                    return null;
+                }
             }
         }
         customElements.define('pc4u-restaurant', Pc4uRestaurant);
