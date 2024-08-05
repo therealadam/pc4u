@@ -1,0 +1,32 @@
+[
+  {
+    "name": "I would lye 4 u",
+    "slug": "i-would-lye-4-u",
+    "slogan": "Fine soap products",
+    "offerings": [
+      "Fine soaps",
+      "Aromatic candles"
+    ],
+    "extra": "*Note*: No _Fight Club_ stuff, don't ask."
+  },
+  {
+    "name": "U Got The Hook",
+    "slug": "u-got-the-hook",
+    "slogan": "The freshest seafood in the MPLS",
+    "offerings": [
+      "Fish",
+      "Shrimp",
+      "Starfish"
+    ],
+    "extra": "TK We also have a great selection of fishing gear."
+  },
+  {
+    "name": "Billy Jack-wich",
+    "slug": "billy-jack-wich",
+    "slogan": "TK",
+    "offerings": [
+      "Sandwiches"
+    ],
+    "extra": "TK We also have a great selection of sandwiches."
+  }
+]

@@ -12,9 +12,9 @@ Principles:
 ## Build and release
 
 To your personal computer:
-1. Open index.html
-2. Reload and repeat
+1. Make changes to source files
+2. `rake dev` will rebuild and open the generated `index.html` file
 
 To the web:
-1. `git push`
+1. `rake release`
 2. That's it

@@ -148,41 +148,27 @@
 </head>
 <body>
 <header>
-    <h1>Prince Cooks 4 U</h1>
-    <p>What if Prince Rogers Nelson had been a prolific local entrepreneur and not a musician?</p>
+  <h1>Prince Cooks 4 U</h1>
+  <p>What if Prince Rogers Nelson had been a prolific local entrepreneur and not a musician?</p>
 </header>
 
 <main>
-    <pc4u-restaurant></pc4u-restaurant>
+  <!--  TODO: build a static random highlight?-->
+  <pc4u-restaurant></pc4u-restaurant>
 </main>
 
-<div id="i-would-lye-4-u">
-  <h1>I would lye 4 u</h1>
-  <h2>Fine soap products</h2>
+<% popups.each do |popup| -%>
+<div id="<%= popup.slug %>">
+  <h1><%= popup.name %></h1>
+  <h2><%= popup.slogan %></h2>
   <ul>
-      <li>Fine soaps</li>
-      <li>Aromatic candles</li>
-    </ul>
-  <p>*Note*: No _Fight Club_ stuff, don't ask.</p>
+  <% popup.offerings.each do |offering| -%>
+    <li><%= offering %></li>
+  <% end -%>
+  </ul>
+  <p><%= popup.extra %></p>
 </div>
-<div id="u-got-the-hook">
-  <h1>U Got The Hook</h1>
-  <h2>The freshest seafood in the MPLS</h2>
-  <ul>
-      <li>Fish</li>
-      <li>Shrimp</li>
-      <li>Starfish</li>
-    </ul>
-  <p>TK We also have a great selection of fishing gear.</p>
-</div>
-<div id="billy-jack-wich">
-  <h1>Billy Jack-wich</h1>
-  <h2>TK</h2>
-  <ul>
-      <li>Sandwiches</li>
-    </ul>
-  <p>TK We also have a great selection of sandwiches.</p>
-</div>
+<% end -%>
 
 <footer>
     <div>About</div>
